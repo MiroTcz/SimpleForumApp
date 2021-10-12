@@ -3,7 +3,7 @@
 
 ## PL
 
-SimpleForumApp to aplikacja dzięki której możemy prowadzić proste forum dyskusyjne.
+SimpleForumApp to aplikacja, dzięki której możemy prowadzić proste forum dyskusyjne.
 Aplikacja pozwala użytkownikowi m.in. publikować posty, tworzyć wątki, zarządzać swoim profilem.
 Dostępny jest również panel administracyjny, w którym możemy łatwo zarządzać użytkownikami, działami forum i zmieniać wybrane ustawienia.
 Prosty konfigurator pozwala szybko przygotować aplikację do pracy, ograniczając znacznie potrzebę edycji istotnych właściwości bezpośrednio w plikach.
@@ -25,8 +25,8 @@ Aby skompilować aplikację wykonaj poniższą komendę w wierszu poleceń w kat
 
 ### Uruchomienie
 
-Aby uruchomić aplikację można użyć poniższego polecenia w wierszu poleceń:
+Aby uruchomić aplikację można użyć poniższego polecenia w wierszu poleceń:  
 `java -jar <nazwa_pliku>.jar`
 
-Przykład:
+Przykład:  
 `java -jar SimpleForumApp-1.0.jar`
