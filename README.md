@@ -1,3 +1,6 @@
+# SimpleForumApp
+
+
 ## PL
 
 SimpleForumApp to aplikacja dzięki której możemy prowadzić proste forum dyskusyjne.
@@ -11,4 +14,19 @@ Prosty konfigurator pozwala szybko przygotować aplikację do pracy, ograniczaj�
 - Do generowania widoku aplikacji użyty został silnik szablonów Thymeleaf.
 - Do stylizacji domyślnego wyglądu zawartości stron aplikacji użyto biblioteki Bootstrap.
 - Aplikacja pozwala przechowywać swoje dane na 2 sposoby: W bazie danych MySQL lub w bazie danych H2.
-- Do uruchomienia aplikacji wymagana jest zainstalowana Java w wersji 11 lub wyższej.
+- Do kompilacji oraz uruchomienia aplikacji wymagana jest zainstalowana Java w wersji 11 lub wyższej.
+
+
+### Kompilacja
+
+Aby skompilować aplikację wykonaj poniższą komendę w wierszu poleceń w katalogu głównym projektu:
+
+`./mvnw clean install`
+
+### Uruchomienie
+
+Aby uruchomić aplikację można użyć poniższego polecenia w wierszu poleceń:
+`java -jar <nazwa_pliku>.jar`
+
+Przykład:
+`java -jar SimpleForumApp-1.0.jar`
