@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${properties.forumTitle}"></title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link th:href="@{/styles.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div th:replace="fragments/header :: header"> </div>
+			<div th:unless="${user}">
+				Musisz być zalogowany.
+			</div>
+			<div th:if="${user}">
+				<form method="POST" th:object="${user}" th:action="@{/usersettings}" id="userSettingsForm">
+					<div class="form-group">
+						<label for="username">Nazwa użytkownika:</label>
+						<input class="form-control" type="text" name="username" th:value="${user.username}" disabled />
+					</div>
+					<div class="form-group">
+						<label for="birthdate">Data urodzenia: </label>
+						<input class="form-control" type="date" th:value="${#dates.format(user.birthdate,'yyyy-MM-dd')}" th:max="${#dates.format(#dates.createNow() , 'yyyy-MM-dd')}" name="birthdate">
+					</div>
+					<div class="form-group">
+						<label for="country">Kraj:</label>
+						<input class="form-control" type="text" name="country" th:value="${user.country}" th:field="*{country}"/>
+					</div>
+					<div class="form-group">
+						<label for="city">Miejscowość:</label>
+						<input class="form-control" type="text" name="city" th:value="${user.city}" th:field="*{city}"/>
+					</div>
+					<div class="form-group">
+						<label for="city">Avatar:</label>
+						<input class="form-control" type="text" name="avatarUrl" placeholder="Adres URL obrazu" th:value="${user.avatarUrl}" th:field="*{avatarUrl}"/>
+						<img th:if="${#strings.isEmpty(user.avatarUrl)}" th:src="@{/images/default-avatar.png}" class="border border-2 border-secondary img-fluid" width="150" height="150">
+						<img th:unless="${#strings.isEmpty(user.avatarUrl)}" th:src="${user.avatarUrl}" class="border border-2 border-secondary img-fluid" width="150" height="150">
+					</div>
+					<button class="btn btn-primary mt-3 border border-1 border-dark" type="submit">Zapisz</button>
+				</form>
+			</div>
+		<div th:replace="fragments/footer :: footer"> </div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+
+</html>

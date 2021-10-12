@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	</head>
+	
+	<body>
+		<div th:fragment="header">
+			<div class="jumbotron">
+				 <!-- <h1 class="display-4" th:text="${@environment.getProperty('forum.settings.forum-title')}" >Tytuł</h1> -->
+				 <h1 class="display-4" th:text="${properties.forumTitle}" >Tytuł</h1>
+			</div>
+			<hr>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			  <div class="container-fluid">
+				<span class="navbar-brand" th:text="${properties.forumTitle}"></span>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Przełącz nawigację">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				  <div class="navbar-nav">
+					<a class="nav-link" th:href="@{/}">Co nowego?</a>
+					<a class="nav-link" th:href="@{/forums}">Przeglądaj forum</a>
+					<a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+					<a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/login}">Zaloguj się</a>
+					<a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/register}">Zarejestruj się</a>
+					<a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/usersettings}">Ustawienia użytkownika</a>
+					<a sec:authorize="hasAuthority('ADMIN')" class="nav-link" th:href="@{/admin}">Panel admina</a>
+					<a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}">Wyloguj się</a>
+				  </div>
+				</div>
+			  </div>
+			</nav>
+			<hr>
+		</div>
+	
+	</body>
+
+
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${properties.forumTitle}"></title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link th:href="@{/styles.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div th:replace="fragments/header :: header"> </div>
+			<div sec:authorize="!isAuthenticated()">
+				Musisz być zalogowany.
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<div sec:authorize="!hasAuthority('ADMIN')">
+					Nie masz uprawnień do tej części forum.
+				</div>
+				
+				<div sec:authorize="hasAuthority('ADMIN')">
+					<div class="mb-4"><h4>Panel administratora</h4></div>
+					
+				<h5>Ustawienia forum</h5>
+				
+					<form method="POST" th:object="${propertiesForm}" th:action="@{/admin/forumsettings}">
+						<div th:if="${#fields.hasAnyErrors()}">Popraw wskazane poniżej błędy i spróbuj ponownie.</div>
+						<div class="form-group">
+							<label for="forumTitle">Tytuł forum</label>
+							<input type="text" class="form-control" name="forumTitle" th:value="${properties.forumTitle}" th:field="*{forumTitle}">
+							<span th:if="${#fields.hasErrors('forumTitle')}" th:errors="*{forumTitle}">Błąd tytułu. </span><br>
+						</div>
+						<div class="form-group">
+							<label for="maxLatestPosts">Limit najnowszych postów na stronie głównej</label>
+							<input type="number" name="latestPostsCount"class="form-control" min="1" max="15" th:value="${properties.latestPostsCount}" th:field="*{latestPostsCount}"/>
+							<span th:if="${#fields.hasErrors('latestPostsCount')}" th:errors="*{latestPostsCount}">Błąd liczby najnowszych postów. </span><br>
+						</div>
+						<div class="form-group">
+							<label for="maxPostLength">Maksymalna długość posta</label>
+							<input type="number" name="maxPostLength"class="form-control" min="0" max="2147483647" th:value="${properties.maxPostLength}" th:field="*{maxPostLength}"/>
+							<span th:if="${#fields.hasErrors('maxPostLength')}" th:errors="*{maxPostLength}">Błąd maksymalnej długości posta. </span><br>
+						</div>
+						<div class="form-group">
+							<label for="defaultUserRole">Domyślna grupa użytkowników</label>
+							<select class="form-select" th:field="*{defaultUserRole}">
+							  <option selected th:value="${properties.defaultUserRole}" th:text="${properties.defaultUserRole}"></option>
+							  <option th:each="role: ${roles}" th:unless="${role.id == properties.defaultUserRole}" th:value="${role.id}" th:text="${role.id}">Role</option>
+							</select>
+						</div>
+						<div class="form-check">
+							<input th:checked="${properties.registrationsEnabled}" class="form-check-input" type="checkbox" name="registrationsEnabled" th:field="*{registrationsEnabled}">
+							<label class="form-check-label" for="registrationsEnabled">Rejestracja nowych użytkowników</label>
+						</div>
+						<div class="form-check">
+							<input th:checked="${properties.setupMode}" class="form-check-input" type="checkbox" name="setupMode" th:field="*{setupMode}">
+							<label class="form-check-label" for="setupMode">Tryb instalacji</label>
+							<div th:unless="${properties.setupMode}" class="form-text">Po włączeniu trybu instalacji nastąpi wylogowanie. Dostęp mozliwy będzie tylko do podstrony /install.</div>
+						</div>
+						<button type="submit" class="btn btn-primary mt-3">Zapisz</button>
+					</form>
+				
+					<div class="d-grid gap-2 col-6 mx-auto">
+							<a class="btn btn-primary" th:href="@{/admin}">Powrót</a>
+					</div>
+					
+					
+					<!--
+					
+					<ul class="list-group">
+					  <a class="btn btn-primary" th:href="@{/admin/forumsettings}"><li class="list-group-item">Ustawienia forum<span th:if="${forumsettings}">(*)</span></li></a>
+					  <li class="list-group-item btn btn-primary"><a th:href="@{/admin/forumcategories}">Zarządzanie działami forum</a><span th:if="${forumcategories}">(*)</span></li>
+					  <li class="list-group-item btn btn-primary"><a th:href="@{/admin/forumusers}">Zarządzanie użytkownikami</a><span th:if="${forumusers}">(*)</span></li>
+					</ul>
+					-->
+				</div>
+			</div>
+		<br>
+		<div th:replace="fragments/footer :: footer"> </div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+
+</html>

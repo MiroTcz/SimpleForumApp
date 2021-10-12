@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${properties.forumTitle}"></title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link th:href="@{/styles.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+		<div th:replace="fragments/header :: header"> </div>
+		<div th:unless="${post}">
+			Nieprawidłowy post.
+		</div>
+		<div th:if="${post}">
+		    <div sec:authorize="isAuthenticated()">
+				<div th:if="${post.userid == #authentication.getPrincipal().getId()}">
+					<form method="POST" th:object="${editpost}" th:action="@{/editpost?postid={id}(id=__${post.id}__)}">
+						<span th:if="${#fields.hasAnyErrors()}">Popraw wskazane poniżej błędy i spróbuj ponownie.</span><br>
+						<div class="form-group">
+							<label for="postContent">Treść posta</label>
+							<textarea maxlength="1000" rows="5" cols="100" name="postContent" class="form-control" th:field="*{postContent}" autofocus>
+								Twoja odpowiedź...
+							</textarea>
+							<span th:if="${#fields.hasErrors('postContent')}" th:errors="*{postContent}">Błąd treści postu.</span>
+						</div>
+						<button type="submit" class="btn btn-primary border border-1 border-dark">Edytuj</button>
+					</form>
+				</div>
+				<div th:unless="${post.userid == #authentication.getPrincipal().getId()}">Nie masz uprawnień do edytowania tego postu.</div>
+			</div>
+			<span sec:authorize="!isAuthenticated()">Zaloguj się, aby edytować post.</span>
+		
+		</div>
+		<div th:replace="fragments/footer :: footer"> </div>
+		</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+
+</html>

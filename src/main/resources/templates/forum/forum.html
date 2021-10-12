@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${properties.forumTitle}"></title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">		
+		<link th:href="@{/styles.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+		<div th:replace="fragments/header :: header"> </div>
+		<div th:unless="${forum}">
+			Nie znaleziono wskazanego forum.
+		</div>
+		<div th:if="${forum}">
+			<h4>Dział: <a th:href="@{/forums/{id}(id=${forum.id})}" th:text="${forum.name}">Nazwa działu</a></h4>
+			<div th:unless="${threads}">
+				Brak wątków w dziale.
+			</div>
+			<div th:if="${threads}" class="container border border-2 border-dark">
+				<div class="row bg-primary">
+					<div class="col-12 bg-primary border-bottom border-1 border-dark text-center fw-bold text-white">Wątki</div>
+				</div>
+				<div th:each="thread : ${threads}" class="row border-bottom border-1 border-dark align-items-center">
+					<div class="col-6">
+						<a th:href="@{/threads/{id}(id=${thread.threadId})}"><span class="fw-bold" th:text="${thread.threadTitle}">Nazwa wątku</span></a>
+					</div>
+					<div class="col-2">
+						Autor: <span class="fw-bold" th:text="${thread.threadAuthor}">AUTOR</span>
+					</div>
+					<div class="col-2">
+						<a sec:authorize="isAuthenticated()" th:if="${thread.threadAuthorId == #authentication.getPrincipal().getId()}" class="btn btn-sm border border-1 border-dark btn-primary mt-1 mb-1" th:href="@{/editthread?threadid={id}(id=${thread.threadId})}">Edytuj</a>
+					</div>
+					<div class="col-2">
+						<a sec:authorize="isAuthenticated()" th:if="${thread.threadAuthorId == #authentication.getPrincipal().getId()}" class="btn btn-sm border border-1 border-dark btn-danger mt-1 mb-1" th:href="@{/deletethread?threadid={id}(id=${thread.threadId})}">Usuń</a>
+					</div>
+				</div>
+			</div>
+			<span sec:authorize="isAuthenticated()"><a class="btn btn-primary border border-1 border-dark" th:href="@{/newthread?forumid={id}(id=${forum.id})}">Nowy wątek</a><br></span>
+		</div>
+		<div th:replace="fragments/footer :: footer"> </div>
+		</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+
+</html>

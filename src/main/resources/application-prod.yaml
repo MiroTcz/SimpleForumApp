@@ -1,0 +1,14 @@
+spring:
+  thymeleaf:    cache: false
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+      use-new-id-generator-mappings: false
+  sql:
+    init:
+      schema-locations:
+      - classpath:schema.sql
+      mode: always

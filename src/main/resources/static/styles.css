@@ -1,0 +1,36 @@
+@media only screen and (max-width: 600px) {
+	.home-post-author {
+		width: 100%;
+		border-bottom: solid black 1px;
+	}
+	
+	.home-post-date-col {
+		width: 100%;
+	}
+	
+	.home-post-date-col-box {
+		text-align: center;
+	}
+	
+	.home-post-date-col-box-inner {
+		float: none !important;
+	}
+	
+	.thread-post-user-col {
+		width: 100%;
+	}
+	
+	.thread-post-content-col {
+		width: 100%;
+		border-top: solid black 1px;
+	}
+	
+	.thread-date-col {
+		width: 100%;
+	}
+	
+	.thread-actions-col {
+		width: 100%;
+		border-top: solid black 1px;
+	}
+}

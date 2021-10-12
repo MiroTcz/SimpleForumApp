@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${properties.forumTitle}"></title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link th:href="@{/styles.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div th:replace="fragments/header :: header"> </div>
+			<div sec:authorize="!isAuthenticated()">
+				Musisz być zalogowany.
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<div sec:authorize="!hasAuthority('ADMIN')">
+					Nie masz uprawnień do tej części forum.
+				</div>
+				
+				<div sec:authorize="hasAuthority('ADMIN')">
+					<div class="mb-4"><h4>Panel administratora</h4></div>
+					
+				<div class="mb-3"><h5>Zarządzanie działami forum</h5></div>
+				
+				<div th:unless="${forum}" class="mb-3">
+					Nie znaleziono działu forum.
+				</div>
+				
+				<div th:if="${forum}" class="mb-3">
+					<div><h5>Dział: <span class="fw-bold" th:text="${forum.name}">Nazwa działu</span></h5></div>
+					<form method="POST" th:object="${forum}" th:action="@{/admin/forumcategories/delete?forumid={id}(id=${forum.id})}">
+						<div>Na pewno chcesz usunąć wskazany dział forum? To usunie również wszystkie wątki i posty w tym dziale. Tej operacji nie można cofnąć.</div>
+
+						<button class="btn btn-danger border border-1 border-dark" type="submit">Usuń dział</button>
+					</form>
+				</div>
+				
+				<div class="d-grid gap-2 col-6 mx-auto">
+						<a class="btn btn-primary border border-1 border-dark" th:href="@{/admin/forumcategories}">Powrót</a>
+				</div>
+					
+				</div>
+			</div>
+		<br>
+		<div th:replace="fragments/footer :: footer"> </div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+
+</html>

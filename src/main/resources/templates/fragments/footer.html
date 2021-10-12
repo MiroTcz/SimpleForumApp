@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	</head>
+	
+	<body>
+		<div th:fragment="footer" class="text-center">
+			<hr>
+			<div th:text="${properties.forumTitle}">TYTUŁ FORUM</div><div sec:authorize="isAuthenticated()" class="navbar-text">
+					Zalogowany użytkownik: <span sec:authentication="name" class="fw-bold">Użytkownik</div>
+				  </span>
+		</div>
+	
+	</body>
+
+
+
+</html>
