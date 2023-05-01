@@ -58,7 +58,7 @@ public class ThreadController extends BaseController {
 		if(errors.hasErrors()) {
 			fillModelWithForumAndThreadInfo(model, threadid);
 			fillModelWithPosts(model, threadid);
-			return "thread/thread";
+			return "/thread/thread";
 		}
 		PostRepository postRepo = repositories.getPostRepository();
 		Post post = new Post(replyBody.getPostContent());
