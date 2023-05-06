@@ -28,17 +28,6 @@ import pl.maciejnierzwicki.simpleforumapp.object.user.User;
 @Component
 public class ForumInitializer {
 	
-	/*
-	@Autowired
-	@Value("${forum.properties-file-path:classpath:forum.properties}")
-	private String filePath;
-	
-	@Bean
-	public String filePath() {
-		return filePath;
-	}
-	*/
-	
 	private Repositories repositories;
 	
 	@Autowired
