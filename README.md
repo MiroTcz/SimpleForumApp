@@ -29,4 +29,6 @@ Aby uruchomić aplikację można użyć poniższego polecenia w wierszu poleceń
 `java -jar <nazwa_pliku>.jar`
 
 Przykład:  
-`java -jar SimpleForumApp-1.0.jar`
+`java -jar SimpleForumApp-1.0.jar`  
+
+**Screenshots:** [LINK](https://www.maciejnierzwicki.pl/projects/simpleforumapp/)
