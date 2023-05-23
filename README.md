@@ -1,34 +1,36 @@
-# SimpleForumApp
+# SimpleForumApp - Bulletin board app
 
 
-## PL
+## About project
 
-SimpleForumApp to aplikacja, dzięki której możemy prowadzić proste forum dyskusyjne.
-Aplikacja pozwala użytkownikowi m.in. publikować posty, tworzyć wątki, zarządzać swoim profilem.
-Dostępny jest również panel administracyjny, w którym możemy łatwo zarządzać użytkownikami, działami forum i zmieniać wybrane ustawienia.
-Prosty konfigurator pozwala szybko przygotować aplikację do pracy, ograniczając znacznie potrzebę edycji istotnych właściwości bezpośrednio w plikach.
+Make use of this light forum software to let people discuss about anything.Create threads and organize them in categories.   
+Control use of specific parts of app.
 
-### Informacje techniczne
+### Features
 
-- Aplikacja została przygotowana z wykorzystaniem frameworka Spring.
-- Do generowania widoku aplikacji użyty został silnik szablonów Thymeleaf.
-- Do stylizacji domyślnego wyglądu zawartości stron aplikacji użyto biblioteki Bootstrap.
-- Aplikacja pozwala przechowywać swoje dane na 2 sposoby: W bazie danych MySQL lub w bazie danych H2.
-- Do kompilacji oraz uruchomienia aplikacji wymagana jest zainstalowana Java w wersji 11 lub wyższej.
+- Create and manage your own threads
+- Make replies in threads
+- Manage your profile and view others profiles
+- Manage categories
+- Manage users
+- Set limit of text allowed in post
+- Set pages header and title
+- Enable/disable user registration
+- Store app data in MySQL or H2 database
 
 
-### Kompilacja
+### Compile & Run
 
-Aby skompilować aplikację wykonaj poniższą komendę w wierszu poleceń w katalogu głównym projektu:
+Java 11 or higher is required.
+
+To compile this project run following command:
 
 `./mvnw clean install`
 
-### Uruchomienie
+To run this app execute following command:
+`java -jar <filename>.jar`
 
-Aby uruchomić aplikację można użyć poniższego polecenia w wierszu poleceń:  
-`java -jar <nazwa_pliku>.jar`
-
-Przykład:  
+Example:  
 `java -jar SimpleForumApp-1.0.jar`  
 
 **Screenshots:** [LINK](https://www.maciejnierzwicki.pl/projects/simpleforumapp/)
